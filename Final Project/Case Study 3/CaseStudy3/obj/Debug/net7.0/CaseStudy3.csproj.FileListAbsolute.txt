@@ -1,0 +1,14 @@
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\bin\Debug\net7.0\CaseStudy3.exe
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\bin\Debug\net7.0\CaseStudy3.deps.json
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\bin\Debug\net7.0\CaseStudy3.runtimeconfig.json
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\bin\Debug\net7.0\CaseStudy3.dll
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\bin\Debug\net7.0\CaseStudy3.pdb
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.AssemblyInfoInputs.cache
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.AssemblyInfo.cs
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.csproj.CoreCompileInputs.cache
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.dll
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\refint\CaseStudy3.dll
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.pdb
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\CaseStudy3.genruntimeconfig.cache
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\CaseStudy3\obj\Debug\net7.0\ref\CaseStudy3.dll
