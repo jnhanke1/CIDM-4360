@@ -1,0 +1,4 @@
+DoNotReply@99e64364-25d6-4d64-ba95-3a87ff4bbdb2.azurecomm.net
+
+endpoint=https://jhankecommservice.unitedstates.communication.azure.com/;accesskey=EcVPY6xJrHg7QMV2+oLtc/KgKp+17ZTlRK10h30ahkXfCmQcOoj3+r4gAuieFwpR/4ekmTafHrJ5W5XvoZJK5g==
+
