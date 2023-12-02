@@ -43,6 +43,21 @@ class DataTier{
        
     }
 
+public DataTable SearchAllResident(){
+    MySqlConnection conn = new MySqlConnection(connStr); 
+    string SQL = "SELECT * FROM Residents;";
+    MySqlCommand cmd = new MySqlCommand(SQL, conn); 
+
+    MySqlDataReader rdr = cmd.ExecuteReader();
+
+    DataTable tableResident = new DataTable();
+    tableResident.Load(rdr); 
+    rdr.Close(); 
+    conn.Close(); 
+    return tableResident; 
+}
+
+
 public void displayResidents(DataTable tableResidents){
     MySqlConnection conn = new MySqlConnection(connStr);
     Console.WriteLine("-------------------- List of all Residents in System --------------------");
