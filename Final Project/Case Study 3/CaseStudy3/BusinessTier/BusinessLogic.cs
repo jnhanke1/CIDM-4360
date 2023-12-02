@@ -29,13 +29,13 @@ class BusinessLogic
                     // list of all residents: 
                     case 1:
                     Console.WriteLine("List of All Residents");
-                    DataTable tableResidents = database.displayResidents(resident); 
+                     DataTable tableResidents = database.displayResidents(resident); 
                     appGUI.displayResidents(tableResidents);
 
                     //    DataTable tableResidents(DataTable tableResidents){
                     //     Console.WriteLine("-------------------- List of all Residents in System --------------------"); 
-                    //     foreach(DataRow row in tableResidents.Rows){
-                    //         Console.WriteLine($"ID: {row["id"]} - {row["full_name"]} \t Unit {row["unit_number"]} \t Email: {row["email"]} ");
+                      //   foreach(DataRow row in database.tableResidents.Rows){
+                       //     Console.WriteLine($"ID: {row["id"]} - {row["full_name"]} \t Unit {row["unit_number"]} \t Email: {row["email"]} ");
                     //     }
                         break;
 
@@ -52,6 +52,7 @@ class BusinessLogic
                     // Notate a Package Picked Up
                     case 4:
                         Console.WriteLine("Notate a Package Picked Up");
+
                         break;
                     // Delete a Package
                     case 5:
@@ -61,6 +62,7 @@ class BusinessLogic
                     // Search Package History
                     case 6:
                         Console.WriteLine("Search Package History");
+
                         break; 
                     case 7:
                     //     Console.WriteLine("See Pending Packages");
