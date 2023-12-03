@@ -44,13 +44,16 @@ class DataTier{
     }
 
 public DataTable SearchAllResident(){
+
     MySqlConnection conn = new MySqlConnection(connStr); 
-    string SQL = "SELECT * FROM Residents;";
+    conn.Open(); 
+    //Console.WriteLine("-------------- List of all Residents -------------"); 
+    string SQL = "SELECT * FROM Residents;"; 
     MySqlCommand cmd = new MySqlCommand(SQL, conn); 
 
-    MySqlDataReader rdr = cmd.ExecuteReader();
+    MySqlDataReader rdr = cmd.ExecuteReader(); 
 
-    DataTable tableResident = new DataTable();
+    DataTable tableResident = new DataTable(); 
     tableResident.Load(rdr); 
     rdr.Close(); 
     conn.Close(); 
@@ -58,13 +61,13 @@ public DataTable SearchAllResident(){
 }
 
 
-public void displayResidents(DataTable tableResidents){
+public void displayResidents(DataTable tableResident){
     MySqlConnection conn = new MySqlConnection(connStr);
-    Console.WriteLine("-------------------- List of all Residents in System --------------------");
+    Console.WriteLine("-------------------- List of Residents  --------------------");
         try
         {  
             conn.Open();
-            foreach(DataRow row in tableResidents.Rows) {
+            foreach(DataRow row in tableResident.Rows) {
             Console.WriteLine($"ID: {row["id"]} - {row["full_name"]} \t Unit {row["unit_number"]} \t Email: {row["email"]} ");
             conn.Close();
             //return;
@@ -80,62 +83,77 @@ public void displayResidents(DataTable tableResidents){
         }
 
 
-public void SearchResident(Resident resident){
+public DataTable SearchResident(){
         MySqlConnection conn = new MySqlConnection(connStr);
         Console.WriteLine("-------------------- Resident Search --------------------"); 
         Console.WriteLine("Please input a resident name to search: ");
         string resident1 = Console.ReadLine();
+        Console.WriteLine("Please input the resident unit Number: "); 
+        string? residentUnit = Console.ReadLine(); 
         try
         {  
             conn.Open();
             string procedure = "searchRes";
             MySqlCommand cmd = new MySqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@inputResident", resident.full_name);
-            cmd.Parameters.AddWithValue("@inputUnitNo", resident.unit_number);
+            cmd.Parameters.AddWithValue("@inputResident", resident1);
+            cmd.Parameters.AddWithValue("@inputUnitNo", residentUnit);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
-            // SELECT * FROM [SearchResident]; 
-            // tableResidents.Load(rdr);
+            DataTable tableTargetResident = new DataTable(); 
+            tableTargetResident.Load(rdr); 
             rdr.Close();
             conn.Close();
-            // return tableResidents;
+            return tableTargetResident;
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
             conn.Close();
-            return;
+            return null;
         }
     }
 
 
     //add a package 
-public void addPackage(Package package){
+public void addPackage(){
         MySqlConnection conn = new MySqlConnection(connStr);
         Console.WriteLine("-------------------- Add a Package --------------------"); 
         Console.WriteLine("Please input the following information to record: ");
-        string package1 = Console.ReadLine();
+        Console.WriteLine("Please input Tracking Number: "); 
+        string tracking_number = Console.ReadLine(); 
+        Console.WriteLine("Please input Recipient's Name: "); 
+        string recipient_name = Console.ReadLine(); 
+        Console.WriteLine("Please input Resident's ID (999 if not a resident): "); 
+        int id = int.Parse(Console.ReadLine()); 
+        Console.WriteLine("Please input Unit Number: "); 
+        int unit_number = int.Parse(Console.ReadLine()); 
+        Console.WriteLine("Please input postal Agency:"); 
+        string postalAgency = Console.ReadLine(); 
+        Console.WriteLine("Please input Delivery Date: "); 
+        string? deliveryDate = Console.ReadLine(); 
+        
         try
         {  
             conn.Open();
             string procedure = "addPackage";
             MySqlCommand cmd = new MySqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@inputTrackingNo", package.tracking_number);
+            cmd.Parameters.AddWithValue("@inputTrackingNo", tracking_number);
            // cmd.Parameters["@nputTrackingNo"].Direction = ParameterDirection.Input;
-            cmd.Parameters.AddWithValue("@inputRecipientName", package.recipient_name);
-            cmd.Parameters.AddWithValue("@inputunitNumber", package.unit_number); 
+            cmd.Parameters.AddWithValue("@inputRecipientName", recipient_name);
+            cmd.Parameters.AddWithValue("@inputID", id); 
+            cmd.Parameters.AddWithValue("@inputunitNumber", unit_number); 
            // cmd.Parameters["@inputRecipientName"].Direction = ParameterDirection.Input;
-            cmd.Parameters.AddWithValue("@inputPostalAgency", package.postalAgency); 
+            cmd.Parameters.AddWithValue("@inputPostalAgency", postalAgency); 
             //cmd.Parameters["@inputPostalAgency"].Direction = ParameterDirection.Input; 
-            cmd.Parameters.AddWithValue("@inputDeliveryDate", package.deliveryDate); 
+            cmd.Parameters.AddWithValue("@inputDeliveryDate", Convert.ToDateTime(deliveryDate)); 
            // cmd.Parameters["@inputDeliveryDate"].Direction = ParameterDirection.Input; 
 
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
             Console.WriteLine("Package has been added to system."); 
-            rdr.Close();
             conn.Close();
+            
             
         }
         catch (Exception ex)
@@ -147,32 +165,24 @@ public void addPackage(Package package){
     }
 
     //notate a package picked up 
-public void PickupPackage(Package package){
+public void PickupPackage(){
         MySqlConnection conn = new MySqlConnection(connStr);
         Console.WriteLine("-------------------- Notate a Package as Picked Up --------------------"); 
         Console.WriteLine("Please input a tracking number to search: ");
-        string package1 = Console.ReadLine();
+        string tracking_number = Console.ReadLine();
         try
         {  
             conn.Open();
             string procedure = "PickupPackage";
             MySqlCommand cmd = new MySqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@inputTrackingNo", package.tracking_number);
+            cmd.Parameters.AddWithValue("@inputTrackingNo", tracking_number);
             // cmd.Parameters.AddWithValue("@inputRecipientName", Package.recipient_name);
             // cmd.Parameters.AddWithValue("@inputResidentName", Package.full_name);
 
-
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            // SELECT * FROM [searchPackage]
-            // WHERE @inputTrackingNo = Package.tracking_number; 
-            // searchPackage.Load(rdr);
-
+            cmd.ExecuteNonQuery();
             Console.WriteLine("Package has been updated as picked up."); 
-
-            rdr.Close();
             conn.Close();
-            // return tableResidents;
         }
         catch (Exception ex)
         {
@@ -183,27 +193,25 @@ public void PickupPackage(Package package){
     }
 
     //delete a package
-public void deletePackage(Package package){
+public void deletePackage(){
         MySqlConnection conn = new MySqlConnection(connStr);
         Console.WriteLine("-------------------- Delete a Package --------------------"); 
         Console.WriteLine("Please input the following information to delete record: ");
-        string package1 = Console.ReadLine();
+        Console.WriteLine("Please enter Recipient Name: "); 
+        string recipient_name = Console.ReadLine(); 
+        Console.WriteLine("Please enter Tracking Number: ");
+        string tracking_number = Console.ReadLine();
         try
         {  
             conn.Open();
             string procedure = "deletePackage";
             MySqlCommand cmd = new MySqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@inputRecipientName", package.recipient_name);       
-            cmd.Parameters.AddWithValue("@inputResidentName", package.full_name); 
-            cmd.Parameters.AddWithValue("@inputTrackingNo", package.tracking_number);
-           // cmd.Parameters["@nputTrackingNo"].Direction = ParameterDirection.Input;
-
- 
-
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            cmd.Parameters.AddWithValue("@inputRecipientName", recipient_name);       
+            cmd.Parameters.AddWithValue("@inputTrackingNo", tracking_number);
+    
+            cmd.ExecuteNonQuery();
             Console.WriteLine("Package has been removed from system."); 
-            rdr.Close();
             conn.Close();
             
         }
@@ -216,41 +224,74 @@ public void deletePackage(Package package){
     }
 
     //search package history
-public void searchPackage(Package package){
+public DataTable searchPackage(){
         MySqlConnection conn = new MySqlConnection(connStr);
         Console.WriteLine("-------------------- View Package History --------------------"); 
-        Console.WriteLine("Please input the following to search, or leave blank and enter to go to next search criteria: ");
-        string package1 = Console.ReadLine();
+        Console.WriteLine("Please input Recipient Name: "); 
+        string recipient_name = Console.ReadLine(); 
+        Console.WriteLine("Please input Resdient's Unit Number: "); 
+        int unit_number = int.Parse(Console.ReadLine()); 
+
         try
         {  
             conn.Open();
             string procedure = "searchPackage";
             MySqlCommand cmd = new MySqlCommand(procedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@inputRecipientName", package.recipient_name);
-            cmd.Parameters.AddWithValue("@inputTrackingNo", package.tracking_number);
-            cmd.Parameters.AddWithValue("@inputUnitNo", package.unit_number);
+            cmd.Parameters.AddWithValue("@inputRecipientName", recipient_name);
+            cmd.Parameters.AddWithValue("@inputUnitNo", unit_number);
 
             MySqlDataReader rdr = cmd.ExecuteReader();
-            // SELECT * FROM [SearchResident]; 
-            // tableResidents.Load(rdr);
+            DataTable tableTargetPackage = new DataTable(); 
+            tableTargetPackage.Load(rdr); 
             rdr.Close();
             conn.Close();
-            // return tableResidents;
+            return tableTargetPackage;
+
+            
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
             conn.Close();
-            return;
+            return null;
         }
     }
 
-    //see pending packages  -- under GuiTier
+    //see pending packages
+public DataTable PendingPackages(){
 
+    MySqlConnection conn = new MySqlConnection(connStr); 
+    conn.Open(); 
+    string SQL = "SELECT * FROM Pending_Packages;"; 
+    MySqlCommand cmd = new MySqlCommand(SQL, conn); 
+
+    MySqlDataReader rdr = cmd.ExecuteReader(); 
+
+    DataTable Pending_Packages = new DataTable(); 
+    Pending_Packages.Load(rdr); 
+    rdr.Close(); 
+    conn.Close(); 
+    return Pending_Packages; 
+}
 
     //see unknown pakcages
 
+public DataTable UnknownPkg(){
+
+    MySqlConnection conn = new MySqlConnection(connStr); 
+    conn.Open(); 
+    string SQL = "SELECT * FROM Unknown_Packages;"; 
+    MySqlCommand cmd = new MySqlCommand(SQL, conn); 
+
+    MySqlDataReader rdr = cmd.ExecuteReader(); 
+
+    DataTable Unknown_Packages = new DataTable(); 
+    Unknown_Packages.Load(rdr); 
+    rdr.Close(); 
+    conn.Close(); 
+    return Unknown_Packages; 
+}
 
 
 

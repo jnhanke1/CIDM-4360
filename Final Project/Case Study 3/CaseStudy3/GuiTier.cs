@@ -23,27 +23,38 @@ class GuiTier{
         DateTime localDate = DateTime.Now;
         Console.WriteLine("---------------Dashboard-------------------");
         Console.WriteLine($"Hello: {staff.staff_username}; Date/Time: {localDate.ToString()}");
+        Console.WriteLine(" "); 
         Console.WriteLine("Please select an option to continue:");
-        Console.WriteLine("1. List all Residents in System"); 
-        Console.WriteLine("2. Search for a Resident");
-        Console.WriteLine("3. Add a Package Received");
-        Console.WriteLine("4. Notate a Package Picked Up");
-        Console.WriteLine("5. Delete a Package");
-        Console.WriteLine("6. Search Package History"); 
-        Console.WriteLine("7. See Pending Packages"); 
-        Console.WriteLine("8. See Unknown Packages"); 
-        Console.WriteLine("9. Log Out");
+        Console.WriteLine("\t 1. List all Residents in System"); 
+        Console.WriteLine("\t 2. Search for a Resident");
+        Console.WriteLine("\t 3. Add a Package Received");
+        Console.WriteLine("\t 4. Notate a Package Picked Up");
+        Console.WriteLine("\t 5. Delete a Package");
+        Console.WriteLine("\t 6. Search Package History"); 
+        Console.WriteLine("\t 7. See Pending Packages"); 
+        Console.WriteLine("\t 8. See Unknown Packages"); 
+        Console.WriteLine("\t 9. Log Out");
         int option = Convert.ToInt16(Console.ReadLine());
         return option;
     }
 
+
     // show resident records returned from database
-    public void displayResidents(DataTable tableResidents){
+    public void displayResidents(DataTable tableResident){
         Console.WriteLine("--------------- Residents List -------------------");
-        foreach(DataRow row in tableResidents.Rows){
+        foreach(DataRow row in tableResident.Rows){
            Console.WriteLine($"Resident {row["id"]}: {row["full_name"]} \t Unit Number: {row["unit_number"]} \t Email:{row["email"]}");
         }
         Console.WriteLine("---if recipient is not in Resident List, please list name as UNKNON with ID 999 and Unit 00 when entering a new package."); 
+    }
+
+        // show resident records returned from database
+    public void displayPackages(DataTable tablePackage){
+        Console.WriteLine("--------------- Package Record History -------------------");
+        foreach(DataRow row in tablePackage.Rows){
+           Console.WriteLine($"Recipient Name {row["recipient_name"]} | Tracking Number: {row["tracking_number"]} | Delivery Date: {row["deliveryDate"]} | Postal Agency: {row["postalAgency"]} | Date Picked Up: {row["pickupDate"]}");
+        }
+        
     }
 
     // show pending packages returned from View

@@ -1,0 +1,4 @@
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\obj\Debug\net7.0\Case Study 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\obj\Debug\net7.0\Case Study 3.AssemblyInfoInputs.cache
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\obj\Debug\net7.0\Case Study 3.AssemblyInfo.cs
+C:\Users\jessi\Documents\Jessica - College\CIDM 4360\Final Project\Case Study 3\obj\Debug\net7.0\Case Study 3.csproj.CoreCompileInputs.cache
